@@ -47,7 +47,8 @@
     "joi": "10.2.x",
     "joi-to-json-schema": "2.5.x",
     "lodash": "4.17.x",
-    "maf-error": "0.9.x"
+    "maf-error": "0.9.x",
+    "maf-kind-of": "0.1.x"
   },
   "nyc": {
     "all": true,
