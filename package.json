@@ -44,9 +44,9 @@
     "tap": "10.x"
   },
   "dependencies": {
-    "joi": "^10.2.2",
-    "joi-to-json-schema": "^2.5.0",
-    "lodash": "^4.17.4",
+    "joi": "10.2.x",
+    "joi-to-json-schema": "2.5.x",
+    "lodash": "4.17.x",
     "maf-error": "0.9.x"
   },
   "nyc": {
