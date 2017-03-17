@@ -17,7 +17,9 @@ module.exports = function (logger, config, httpParam) {
 
     return new Promise((resolve, reject) => {
 
-        httpParam = prepare(httpParam);
+        logger.debug('validate http param', httpParam);
+
+        httpParam = prepare(logger, httpParam);
 
         var schema = createHttpParamSchema();
 

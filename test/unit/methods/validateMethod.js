@@ -14,7 +14,12 @@ t.test('should return promise', function (t) {
         }
     });
 
-    var promise = validateMethod();
+    var logger = {
+        debug: function () {},
+        trace: function () {}
+    };
+
+    var promise = validateMethod(logger);
 
     t.type(promise.then, 'function');
     t.type(promise.catch, 'function');
@@ -25,7 +30,10 @@ t.test('should return promise', function (t) {
 
 t.test('should call joi.validate', function (t) {
 
-    var logger = {debug: function () {}};
+    var logger = {
+        debug: function () {},
+        trace: function () {}
+    };
 
     var config = {a: 1};
 
@@ -62,7 +70,12 @@ t.test('should resolve promise with valid data, if rawMethod valid', function (t
         }
     });
 
-    validateMethod()
+    var logger = {
+        debug: function () {},
+        trace: function () {}
+    };
+
+    validateMethod(logger)
             .then(function (valid) {
                 t.same(valid, {a: 1});
                 t.end();
@@ -81,7 +94,12 @@ t.test('should reject RestError code = INVALID_METHOD_OBJECT, if validation fail
         }
     });
 
-    validateMethod()
+    var logger = {
+        debug: function () {},
+        trace: function () {}
+    };
+
+    validateMethod(logger)
             .then(function () {
                 t.threw(new Error('should reject'));
             })

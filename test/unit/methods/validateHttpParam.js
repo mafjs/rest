@@ -14,7 +14,12 @@ t.test('should return promise', function (t) {
         }
     });
 
-    var promise = validateHttpParam();
+    var logger = {
+        debug: function () {},
+        trace: function () {}
+    };
+
+    var promise = validateHttpParam(logger);
 
     t.type(promise.then, 'function');
     t.type(promise.catch, 'function');
@@ -25,7 +30,10 @@ t.test('should return promise', function (t) {
 
 t.test('should call joi.validate', function (t) {
 
-    var logger = {debug: function () {}};
+    var logger = {
+        debug: function () {},
+        trace: function () {}
+    };
 
     var config = {a: 1};
 
@@ -51,7 +59,10 @@ t.test('should call joi.validate', function (t) {
 
 t.test('should call validateHttpParam/prepare fn', function (t) {
 
-    var logger = {debug: function () {}};
+    var logger = {
+        debug: function () {},
+        trace: function () {}
+    };
 
     var config = {a: 1};
 
@@ -88,7 +99,12 @@ t.test('should resolve promise with valid data, if rawHttpParam valid', function
         }
     });
 
-    validateHttpParam()
+    var logger = {
+        debug: function () {},
+        trace: function () {}
+    };
+
+    validateHttpParam(logger)
             .then(function (valid) {
                 t.same(valid, {a: 1});
                 t.end();
@@ -107,7 +123,12 @@ t.test('should reject RestError code = INVALID_HTTP_PARAM_OBJECT, if validation 
         }
     });
 
-    validateHttpParam()
+    var logger = {
+        debug: function () {},
+        trace: function () {}
+    };
+
+    validateHttpParam(logger)
             .then(function () {
                 t.threw(new Error('should reject'));
             })

@@ -1,4 +1,4 @@
-module.exports = function (raw) {
+module.exports = function (logger, raw) {
 
     var obj = raw;
 
@@ -10,6 +10,8 @@ module.exports = function (raw) {
             method: raw.substring(0, raw.indexOf(' ')),
             path: raw.substring(firstSpacePosition + 1)
         };
+
+        logger.debug('parse http param string', raw, obj);
 
     }
 
