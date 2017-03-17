@@ -112,7 +112,15 @@ class Rest {
     }
 
     _validateLogger (logger) {
-        // TODO check logger
+
+        if (!logger) {
+            return {
+                debug: function () {},
+                trace: function () {}
+            };
+        }
+
+        // TODO validate logger
         return logger;
     }
 
