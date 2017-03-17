@@ -5,8 +5,15 @@ var validateHttpParam = require('./methods/validateHttpParam');
 var validateMethod = require('./methods/validateMethod');
 var addExpressMethod = require('./methods/addExpressMethod');
 
+/**
+ *
+ */
 class Rest {
 
+    /**
+     * @param {?Logger} logger
+     * @param {?Object} config
+     */
     constructor (logger, config) {
         this.Error = RestError;
 
@@ -16,6 +23,13 @@ class Rest {
         this._methods = [];
     }
 
+    /**
+     * add rest method
+     *
+     * @param {String|Object} rawHttp
+     * @param {Object} rawMethod
+     * @return {Promise}
+     */
     addMethod (rawHttp, rawMethod) {
 
         this._logger.debug('addMethod', rawHttp, rawMethod);
@@ -43,6 +57,12 @@ class Rest {
             });
     }
 
+    /**
+     * add rest methods
+     *
+     * @param {Object} methods
+     * @return {Promise}
+     */
     addMethods (methods) {
 
         return new Promise((resolve, reject) => {
@@ -81,6 +101,12 @@ class Rest {
 
     }
 
+    /**
+     * add rest methods to express app
+     *
+     * @param {Express} app
+     * @return {Promise}
+     */
     init (app) {
         // app should be express app
 
@@ -111,6 +137,11 @@ class Rest {
 
     }
 
+    /**
+     * @private
+     * @param {Logger} logger
+     * @return {Logger}
+     */
     _validateLogger (logger) {
 
         if (!logger) {
@@ -124,6 +155,11 @@ class Rest {
         return logger;
     }
 
+    /**
+     * @private
+     * @param {Object} config
+     * @return {Object}
+     */
     _validateConfig (config) {
         // TODO check config
         if (!config) {
@@ -138,6 +174,10 @@ class Rest {
         return config;
     }
 
+    /**
+     * @param {*} value
+     * @return {String}
+     */
     _json (value) {
         return JSON.stringify(value);
     }
