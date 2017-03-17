@@ -1,15 +1,5 @@
-'use strict';
-
-var BaseError = require('maf-error');
-
-var RestError = BaseError.create('RestError', {
-    FORBIDDEN: 'forbidden',
-    NO_RESOURCES: 'no resources',
-    NO_METHODS: 'no methods',
-    NO_CALLBACK_IN_METHOD: 'no callback in method %method% %resource%',
-    NO_METHOD_IN_RESOURCES: 'no method "%lcMethod%" in app for resource %method% %resource%',
-    UNKNOWN_REST_MIDDLEWARE_POSITION: 'unknown maf/Rest middleware position: %position%',
-    INVALID_DATA: 'invalid data'
+module.exports = require('maf-error').create('RestError', {
+    INVALID_HTTP_PARAM_OBJECT: 'invalid http param object',
+    INVALID_RESOURCE_OBJECT: 'invalid resource object',
+    INVALID_METHOD_OBJECT: 'invalid resource method object for %method% %path%',
 });
-
-module.exports = RestError;

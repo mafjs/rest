@@ -1,0 +1,120 @@
+var t = require('tap');
+var proxyquire = require('proxyquire');
+
+var root = '../../../package';
+
+var RestError = require(root + '/Error');
+
+
+t.test('should return promise', function (t) {
+
+    var validateHttpParam = proxyquire(root + '/methods/validateHttpParam', {
+        joi: {
+            validate: function () {}
+        }
+    });
+
+    var promise = validateHttpParam();
+
+    t.type(promise.then, 'function');
+    t.type(promise.catch, 'function');
+
+    t.end();
+
+});
+
+t.test('should call joi.validate', function (t) {
+
+    var logger = {debug: function () {}};
+
+    var config = {a: 1};
+
+    var raw = {
+        method: 'GET',
+        path: '/'
+    };
+
+    var validateHttpParam = proxyquire(root + '/methods/validateHttpParam', {
+
+        joi: {
+            validate: function (value) {
+                t.same(value, raw);
+                t.end();
+            }
+        }
+
+    });
+
+    validateHttpParam(logger, config, raw);
+
+});
+
+t.test('should call validateHttpParam/prepare fn', function (t) {
+
+    var logger = {debug: function () {}};
+
+    var config = {a: 1};
+
+    var raw = {
+        method: 'GET',
+        path: '/'
+    };
+
+    var validateHttpParam = proxyquire(root + '/methods/validateHttpParam', {
+
+        './prepare': function () {
+            t.end();
+        },
+
+        joi: {
+            validate: function () {
+
+            }
+        }
+
+    });
+
+    validateHttpParam(logger, config, raw);
+
+});
+
+t.test('should resolve promise with valid data, if rawHttpParam valid', function (t) {
+
+    var validateHttpParam = proxyquire(root + '/methods/validateHttpParam', {
+        joi: {
+            validate: function (value, schema, options, callback) {
+                callback(null, {a: 1});
+            }
+        }
+    });
+
+    validateHttpParam()
+            .then(function (valid) {
+                t.same(valid, {a: 1});
+                t.end();
+            })
+            .catch(t.threw);
+});
+
+
+t.test('should reject RestError code = INVALID_HTTP_PARAM_OBJECT, if validation fails', function (t) {
+
+    var validateHttpParam = proxyquire(root + '/methods/validateHttpParam', {
+        joi: {
+            validate: function (value, schema, options, callback) {
+                callback(new Error('validation fails'));
+            }
+        }
+    });
+
+    validateHttpParam()
+            .then(function () {
+                t.threw(new Error('should reject'));
+            })
+            .catch(function (error) {
+                t.ok(error instanceof RestError);
+                t.equal(error.code, RestError.CODES.INVALID_HTTP_PARAM_OBJECT);
+                t.end();
+            });
+
+});

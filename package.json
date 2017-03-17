@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "clean": "rm -rf package coverage .nyc_output npm-debug.log",
-    "build": "./node_modules/.bin/babel src --out-dir ./package --presets es2015",
+    "build": "./node_modules/.bin/babel src --out-dir ./package --presets es2015 --source-maps",
     "build:for-test": "npm run build -- --plugins istanbul",
     "build:package-json": "node ./scripts/copyPackageJson",
-    "dev": "npm run build -- --watch --plugins istanbul",
+    "dev": "npm run build:for-test -- --watch",
     "test": "npm run build:for-test && ./node_modules/.bin/tap test/unit -J --coverage",
     "test:fast": "./node_modules/.bin/tap test/unit -J",
     "test:cov": "npm test -- --coverage-report=html",
@@ -39,8 +39,11 @@
     "babel-preset-es2015": "6.x",
     "coveralls": "2.x",
     "eslint": "3.x",
+    "express": "^4.15.2",
     "in-publish": "2.x",
+    "log4js-nested": "^1.0.1",
     "proxyquire": "1.x",
+    "source-map-support": "^0.4.13",
     "tap": "10.x"
   },
   "dependencies": {
@@ -55,9 +58,6 @@
     "include": [
       "src/*.js",
       "src/methods/**/*.js"
-    ],
-    "exclude": [
-      "src/modules/kind-of.js"
     ]
   }
 }
