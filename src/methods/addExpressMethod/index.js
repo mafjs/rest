@@ -1,3 +1,7 @@
+var kindOf = require('maf-kind-of');
+
+var validation = require('./validation');
+
 module.exports = function (logger, config, app, method) {
 
     return new Promise((resolve) => {
@@ -8,6 +12,14 @@ module.exports = function (logger, config, app, method) {
         var httpPath = method.http.path;
 
         logger.debug(`add http method`, httpMethod, httpPath);
+
+        if (kindOf(method.schema) === 'object') {
+            validation.path(logger, middlewares, method);
+            validation.query(logger, middlewares, method);
+            validation.cookies(logger, middlewares, method);
+            validation.headers(logger, middlewares, method);
+            validation.body(logger, middlewares, method);
+        }
 
         app[httpMethod](httpPath, middlewares, method.handler);
 

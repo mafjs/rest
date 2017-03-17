@@ -6,5 +6,6 @@ module.exports = require('maf-error').create('RestError', {
         method = "%method%"
         argument = "%param%" should be %validType%
         got type = "%type%"
-        value = %value%`
+        value = %value%`,
+    INVALID_REQUEST_DATA: `invalid request data`
 });
