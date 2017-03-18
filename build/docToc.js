@@ -13,6 +13,10 @@ const internals = {
         filename: __dirname + '/../docs/api.md',
         contents: Fs.readFileSync(__dirname + '/../docs/api.md', 'utf8')
     },
+    usage: {
+        filename: __dirname + '/../docs/usage-planning.md',
+        contents: Fs.readFileSync(__dirname + '/../docs/usage-planning.md', 'utf8')
+    },
     readme: {
         filename: __dirname + '/../README.md',
         contents: Fs.readFileSync(__dirname + '/../README.md', 'utf8')

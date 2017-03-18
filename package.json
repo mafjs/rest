@@ -50,6 +50,7 @@
   "dependencies": {
     "joi": "10.2.x",
     "maf-error": "0.9.x",
+    "maf-http": "0.0.2",
     "maf-kind-of": "0.1.x"
   },
   "nyc": {
