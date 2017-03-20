@@ -623,7 +623,7 @@ bluebird@^3.3.1:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.0.tgz#791420d7f551eea2897453a8a77653f96606d67c"
 
-body-parser@1.x:
+body-parser@^1.17.1:
   version "1.17.1"
   resolved "https://registry.yarnpkg.com/body-parser/-/body-parser-1.17.1.tgz#75b3bc98ddd6e7e0d8ffe750dfaca5c66993fa47"
   dependencies:
@@ -1944,7 +1944,7 @@ maf-error@0.9.x:
   dependencies:
     terror "^1.3.0"
 
-maf-http@0.0.2:
+maf-http@0.0.x:
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/maf-http/-/maf-http-0.0.2.tgz#b6681eaddf53bf5e830d2240cf155bcd35e1e62b"
   dependencies:
