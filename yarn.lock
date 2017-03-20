@@ -623,7 +623,7 @@ bluebird@^3.3.1:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.0.tgz#791420d7f551eea2897453a8a77653f96606d67c"
 
-body-parser@^1.17.1:
+body-parser@1.17.x:
   version "1.17.1"
   resolved "https://registry.yarnpkg.com/body-parser/-/body-parser-1.17.1.tgz#75b3bc98ddd6e7e0d8ffe750dfaca5c66993fa47"
   dependencies:
@@ -1944,13 +1944,14 @@ maf-error@0.9.x:
   dependencies:
     terror "^1.3.0"
 
-maf-http@0.0.x:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/maf-http/-/maf-http-0.0.2.tgz#b6681eaddf53bf5e830d2240cf155bcd35e1e62b"
+maf-http@0.1.x:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/maf-http/-/maf-http-0.1.0.tgz#6385a93e16ec6d4d3c81eab853808c045e01a6d0"
   dependencies:
     joi "10.2.x"
     maf-error "0.9.x"
     maf-kind-of "0.1.x"
+    uuid "3.0.x"
 
 maf-kind-of@0.1.x:
   version "0.1.0"
@@ -3042,7 +3043,7 @@ utils-merge@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.0.tgz#0294fb922bb9375153541c4f7096231f287c8af8"
 
-uuid@^3.0.0:
+uuid@3.0.x, uuid@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.0.1.tgz#6544bba2dfda8c1cf17e629a3a305e2bb1fee6c1"
 
