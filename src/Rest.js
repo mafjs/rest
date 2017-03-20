@@ -23,9 +23,10 @@ class Rest extends Http {
 
     /**
      * @param {Express} app
+     * @param {?Object} di
      * @return {Promise}
      */
-    init (app) {
+    init (app, di) {
 
         return new Promise((resolve, reject) => {
 
@@ -46,7 +47,7 @@ class Rest extends Http {
 
             });
 
-            super.init(app)
+            super.init(app, di)
                 .then(() => {
 
                     initSend(this._logger, app);
