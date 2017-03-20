@@ -1,14 +1,28 @@
 var joi = require('joi');
 
 module.exports = {
-    'GET /test': {
+    'GET /test/count': {
         handler: function (req, res) {
             res.time('test');
 
             setTimeout(function () {
                 res.timeEnd('test');
 
-                res.result({all: 'ok'});
+                res.json('/test/count');
+
+            }, 100);
+
+        }
+    },
+
+    'GET /test/:id': {
+        handler: function (req, res) {
+            res.time('test');
+
+            setTimeout(function () {
+                res.timeEnd('test');
+
+                res.json('/test/:id');
 
             }, 100);
 

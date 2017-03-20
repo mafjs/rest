@@ -18,6 +18,8 @@ var Rest = require('../../package/Rest');
 
 var http = new Rest(logger);
 
+http.setEndpoint('/api/v0');
+
 var methods = require('./methods');
 
 Promise.resolve()
@@ -49,7 +51,9 @@ Promise.resolve()
 
         });
 
-        app.listen(3000);
+        app.listen(3007, function () {
+            logger.info('listen on 3007');
+        });
     })
     .catch((error) => {
         logger.fatal(error);

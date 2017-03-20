@@ -4,7 +4,9 @@ var bodyParser = require('body-parser');
 
 var restResponseHelpers = require('./responseHelpers');
 
-var initSend = require('./methods/initSend');
+var middleware = {
+    send: require('./middlewares/send')
+};
 
 class Rest extends Http {
 
@@ -47,11 +49,10 @@ class Rest extends Http {
 
             });
 
+            super.setBeforeResponseMiddleware(middleware.send);
+
             super.init(app, di)
                 .then(() => {
-
-                    initSend(this._logger, app);
-
                     resolve();
                 })
                 .catch((error) => {
