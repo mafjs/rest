@@ -30,8 +30,23 @@ Promise.resolve()
     .then(() => {
 
         app.use(function (error, req, res, next) {
-            logger.error(error);
-            res.status(500).json(res.httpContext.body);
+
+            error.getCheckChain()
+                .ifCode(http.Error.CODES.INVALID_REQUEST_DATA, function (error) {
+                    res.status(400).json({
+                        error: {
+                            message: 'invalid request data',
+                            requestPart: error.requestPart,
+                            details: error.details
+                        }
+                    });
+                })
+                .else(function (error) {
+                    logger.error(error);
+                    res.status(500).json(res.httpContext.body);
+                })
+                .check();
+
         });
 
         app.listen(3000);

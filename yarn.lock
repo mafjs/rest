@@ -1944,9 +1944,9 @@ maf-error@0.9.x:
   dependencies:
     terror "^1.3.0"
 
-maf-http@0.1.x:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/maf-http/-/maf-http-0.1.0.tgz#6385a93e16ec6d4d3c81eab853808c045e01a6d0"
+maf-http@0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/maf-http/-/maf-http-0.2.1.tgz#a2dd32a2a688fef6194663f134a26b359acf1003"
   dependencies:
     joi "10.2.x"
     maf-error "0.9.x"

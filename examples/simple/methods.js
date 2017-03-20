@@ -1,3 +1,5 @@
+var joi = require('joi');
+
 module.exports = {
     'GET /test': {
         handler: function (req, res) {
@@ -13,8 +15,15 @@ module.exports = {
         }
     },
 
-    'POST /test': function (req, res) {
-        res.result(req.body);
+    'POST /test': {
+        beforeMethodCreation: function (method) {
+            method.schema.body = joi.object().keys({
+                q: joi.string().required()
+            });
+        },
+        handler: function (req, res) {
+            res.result(req.body);
+        }
     },
 
     'GET /badRequest': function (req, res) {
