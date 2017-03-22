@@ -5,10 +5,12 @@ module.exports = {
         handler: function (req, res) {
             res.time('test');
 
+            console.log(req.getQueryParams(['test']));
+
             setTimeout(function () {
                 res.timeEnd('test');
 
-                res.json('/test/count');
+                res.result('/test/count');
 
             }, 100);
 
