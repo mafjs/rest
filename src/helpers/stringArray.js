@@ -2,7 +2,7 @@ var joi = require('joi');
 var _ = require('lodash');
 
 module.exports = {
-    schema: joi.alternatives().try(joi.array().items(joi.string()), joi.string()).default(null),
+    schema: joi.alternatives().try(joi.array().items(joi.string()), joi.string()),
 
     get: function (obj, name) {
 
