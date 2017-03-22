@@ -1,6 +1,6 @@
 {
   "name": "maf-rest",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "http REST API handling",
   "main": "index.js",
   "scripts": {
