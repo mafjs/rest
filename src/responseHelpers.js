@@ -3,8 +3,8 @@ module.exports = {
     result: function (result, metadata) {
 
         this.httpContext.body = {
-            result: result,
-            metadata: metadata
+            metadata: metadata,
+            result: result
         };
 
         this.httpContextNext();
