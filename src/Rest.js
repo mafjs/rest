@@ -21,6 +21,8 @@ class Rest extends Http {
             this.responseHelpers,
             restResponseHelpers
         );
+
+        this._restBeforeResponseMiddleware = middleware.send;
     }
 
     /**
@@ -49,7 +51,7 @@ class Rest extends Http {
 
             });
 
-            super.setBeforeResponseMiddleware(middleware.send);
+            super.setBeforeResponseMiddleware(this._restBeforeResponseMiddleware);
 
             super.init(app, di)
                 .then(() => {
@@ -60,6 +62,15 @@ class Rest extends Http {
                 });
         });
 
+    }
+
+    /**
+     * set before response middleware
+     *
+     * @param {Function} middleware
+     */
+    setBeforeResponseMiddleware (middleware) {
+        this._restBeforeResponseMiddleware = middleware;
     }
 
 }
