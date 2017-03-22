@@ -17,6 +17,8 @@ class Rest extends Http {
     constructor (logger, config) {
         super(logger, config);
 
+
+        // merging with maf-http responseHelpers
         this.responseHelpers = Object.assign(
             this.responseHelpers,
             restResponseHelpers
