@@ -26,6 +26,21 @@ module.exports = {
         this.httpContextNext();
     },
 
+    conflict: function (error) {
+        this.status(409);
+
+        this.httpContext.body = {
+            error: {
+                message: error.message,
+                entity: error.entity,
+                code: error.code,
+                list: error.list
+            }
+        };
+
+        this.httpContextNext();
+    },
+
     notFound: function (error) {
         this.status(404);
 
