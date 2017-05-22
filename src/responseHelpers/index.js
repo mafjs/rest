@@ -111,7 +111,7 @@ module.exports = {
 
         var docs = null;
 
-        if (typeof api === 'function') {
+        if (typeof apiOrFunction === 'function') {
             docs = result.docs.map(doc => apiOrFunction(doc));
         } else {
             docs = apiOrFunction.clearSystemFields(result.docs);
