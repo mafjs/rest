@@ -99,7 +99,7 @@ module.exports = {
         this.httpContextNext();
     },
 
-    sendFindResult: function (result, requestQuery, api) {
+    sendFindResult: function (result, requestQuery, apiOrFunction) {
         var metadata = {
             resultset: {
                 count: result.docs.length,
@@ -109,7 +109,14 @@ module.exports = {
             }
         };
 
-        var docs = api.clearSystemFields(result.docs);
+        var docs = null;
+
+        if (typeof api === 'function') {
+            docs = result.docs.map(doc => apiOrFunction(doc));
+        } else {
+            docs = apiOrFunction.clearSystemFields(result.docs);
+        }
+
 
         this.result(docs, metadata);
     }
