@@ -31,6 +31,7 @@ Promise.resolve()
     })
     .then(() => {
 
+        // eslint-disable-next-line no-unused-vars
         app.use(function (error, req, res, next) {
 
             error.getCheckChain()
