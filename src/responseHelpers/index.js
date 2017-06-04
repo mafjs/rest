@@ -1,3 +1,24 @@
+function generateFindResult (result, requestQuery, apiOrFunction) {
+    var metadata = {
+        resultset: {
+            count: result.docs.length,
+            total: result.total,
+            limit: requestQuery.limit,
+            offset: requestQuery.offset
+        }
+    };
+
+    var docs = null;
+
+    if (typeof apiOrFunction === 'function') {
+        docs = result.docs.map(doc => apiOrFunction(doc));
+    } else {
+        docs = apiOrFunction.clearSystemFields(result.docs);
+    }
+
+    return {docs: docs, metadata: metadata};
+}
+
 module.exports = {
 
     result: function (result, metadata) {
@@ -99,26 +120,11 @@ module.exports = {
         this.httpContextNext();
     },
 
+    generateFindResult: generateFindResult,
+
     sendFindResult: function (result, requestQuery, apiOrFunction) {
-        var metadata = {
-            resultset: {
-                count: result.docs.length,
-                total: result.total,
-                limit: requestQuery.limit,
-                offset: requestQuery.offset
-            }
-        };
-
-        var docs = null;
-
-        if (typeof apiOrFunction === 'function') {
-            docs = result.docs.map(doc => apiOrFunction(doc));
-        } else {
-            docs = apiOrFunction.clearSystemFields(result.docs);
-        }
-
-
-        this.result(docs, metadata);
+        var body = generateFindResult(result, requestQuery, apiOrFunction);
+        this.result(body.docs, body.metadata);
     }
 
     // ...
