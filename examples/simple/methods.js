@@ -1,6 +1,6 @@
 var joi = require('joi');
 
-var TestError = require('maf-error').create('TestError', {
+var TestError = Error.create('TestError', {
     TEST_CODE: 'test code'
 });
 

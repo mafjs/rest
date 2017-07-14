@@ -2045,8 +2045,8 @@ maf-error@0.9.x:
     terror "^1.3.0"
 
 maf-error@1.0.x:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/maf-error/-/maf-error-1.0.0.tgz#f6e7ec1b99ce39090225cc048201e65d2970a232"
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/maf-error/-/maf-error-1.0.1.tgz#27c3ba703080dee38d005e886b459ffdf8ac6ceb"
   dependencies:
     terror "1.3.x"
 
