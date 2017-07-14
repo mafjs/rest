@@ -1,5 +1,9 @@
 var joi = require('joi');
 
+var TestError = require('maf-error').create('TestError', {
+    TEST_CODE: 'test code'
+});
+
 module.exports = {
     'GET /test/count': {
         handler: function (req, res) {
@@ -89,5 +93,12 @@ module.exports = {
         var error = new Error('auth required');
 
         res.unauthorized(error);
+    },
+
+    'GET /mafError': function (req, res) {
+        var oe = new Error('this is original error message');
+        var e = new TestError(TestError.CODES.TEST_CODE, oe);
+
+        res.serverError(e);
     }
 };

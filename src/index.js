@@ -1,1 +1,3 @@
-module.exports = require('./Rest');
+var Rest = require('./Rest');
+
+module.exports = Rest;

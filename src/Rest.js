@@ -57,6 +57,7 @@ class Rest extends Http {
 
             super.init(app, di)
                 .then(() => {
+                    this._initErrorMiddleware(app);
                     resolve();
                 })
                 .catch((error) => {
@@ -73,6 +74,37 @@ class Rest extends Http {
      */
     setBeforeResponseMiddleware (middleware) {
         this._restBeforeResponseMiddleware = middleware;
+    }
+
+    /**
+     * @private
+     * @param {Express} app
+     */
+    _initErrorMiddleware (app) {
+
+        // eslint-disable-next-line no-unused-vars
+        app.use((error, req, res, next) => {
+
+            error.getCheckChain()
+                .ifCode(this.Error.CODES.INVALID_REQUEST_DATA, (error) => {
+
+                    res.status(400).json({
+                        error: {
+                            message: 'invalid request data',
+                            requestPart: error.requestPart,
+                            details: error.details
+                        }
+                    });
+
+                })
+                .else((error) => {
+                    this._logger.error({req: req, err: error});
+                    res.status(500).json(res.httpContext.body);
+                })
+                .check();
+
+        });
+
     }
 
 }
