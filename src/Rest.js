@@ -99,7 +99,18 @@ class Rest extends Http {
                 })
                 .else((error) => {
                     this._logger.error({req: req, err: error});
-                    res.status(500).json(res.httpContext.body);
+                    var response = res.httpContext.body;
+
+                    if (!response) {
+                        response = {
+                            error: {
+                                code: 'SERVER_ERROR',
+                                message: 'server error'
+                            }
+                        };
+                    }
+
+                    res.status(500).json(response);
                 })
                 .check();
 
