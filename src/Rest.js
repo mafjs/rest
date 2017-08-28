@@ -85,6 +85,8 @@ class Rest extends Http {
         // eslint-disable-next-line no-unused-vars
         app.use((error, req, res, next) => {
 
+            var logger = req.logger || this._logger;
+
             error.getCheckChain()
                 .ifCode(this.Error.CODES.INVALID_REQUEST_DATA, (error) => {
 
@@ -98,7 +100,7 @@ class Rest extends Http {
 
                 })
                 .else((error) => {
-                    this._logger.error({req: req, err: error});
+                    logger.error({req: req, err: error});
                     var response = res.httpContext.body;
 
                     if (!response) {
