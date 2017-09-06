@@ -48,7 +48,7 @@
     "express": "^4.15.4",
     "husky": "^0.14.3",
     "in-publish": "^2.0.0",
-    "maf-logger": "^0.4.0",
+    "maf-logger": "^0.6.1",
     "proxyquire": "^1.8.0",
     "source-map-support": "^0.4.17",
     "tap": "^10.7.2"
