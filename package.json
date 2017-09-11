@@ -54,7 +54,7 @@
     "tap": "^10.7.2"
   },
   "dependencies": {
-    "body-parser": "^1.17.2",
+    "body-parser": "^1.18.0",
     "joi": "^10.6.0",
     "lodash": "^4.17.4",
     "maf-error": "^1.2.0",
