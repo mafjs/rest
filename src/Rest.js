@@ -89,6 +89,7 @@ class Rest extends Http {
 
             error.getCheckChain()
                 .ifCode(this.Error.CODES.INVALID_REQUEST_DATA, (error) => {
+                    logger.trace('send 400 Bad Request');
 
                     res.status(400).json({
                         error: {
@@ -99,21 +100,7 @@ class Rest extends Http {
                     });
 
                 })
-                .else((error) => {
-                    logger.error({req: req, err: error});
-                    var response = res.httpContext.body;
-
-                    if (!response) {
-                        response = {
-                            error: {
-                                code: 'SERVER_ERROR',
-                                message: 'server error'
-                            }
-                        };
-                    }
-
-                    res.status(500).json(response);
-                })
+                .else(next)
                 .check();
 
         });
