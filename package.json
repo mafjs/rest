@@ -55,7 +55,7 @@
   },
   "dependencies": {
     "body-parser": "^1.18.1",
-    "joi": "^10.6.0",
+    "joi": "^11.0.2",
     "lodash": "^4.17.4",
     "maf-error": "^1.2.0",
     "maf-http": "^0.7.0",
