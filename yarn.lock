@@ -2288,7 +2288,7 @@ maf-error@^1.2.0:
   dependencies:
     terror "1.4.x"
 
-maf-http@^0.8.0:
+maf-http@^0.8.1:
   version "0.8.1"
   resolved "https://registry.yarnpkg.com/maf-http/-/maf-http-0.8.1.tgz#830e3ae7a8fa08cfe297e66667ead940e3a2e2ba"
   dependencies:
