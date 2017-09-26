@@ -44,8 +44,8 @@
     "babel-eslint": "^8.0.0",
     "babel-plugin-istanbul": "^4.1.5",
     "babel-preset-es2015": "^6.24.1",
-    "eslint": "^4.7.1",
-    "express": "^4.15.4",
+    "eslint": "^4.7.2",
+    "express": "^4.15.5",
     "husky": "^0.14.3",
     "in-publish": "^2.0.0",
     "maf-logger": "^0.6.1",
@@ -54,11 +54,11 @@
     "tap": "^10.7.2"
   },
   "dependencies": {
-    "body-parser": "^1.18.1",
+    "body-parser": "^1.18.2",
     "joi": "^10.6.0",
     "lodash": "^4.17.4",
     "maf-error": "^1.2.0",
-    "maf-http": "^0.7.0",
+    "maf-http": "^0.8.0",
     "maf-kind-of": "^0.1.0"
   },
   "nyc": {
