@@ -22,7 +22,7 @@ var Rest = require('../../package/Rest');
 
 var http = new Rest(logger);
 
-http.setEndpoint('/api/v0');
+// http.setEndpoint('/api/v0');
 
 var methods = require('./methods');
 
