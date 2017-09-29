@@ -1,4 +1,4 @@
-const joi = require('joi');
+const joi = require('maf-http/joi');
 
 const TestError = Error.create('TestError', {
     TEST_CODE: 'test code'

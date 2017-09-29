@@ -1,4 +1,4 @@
-const joi = require('joi');
+const joi = require('maf-http/joi');
 const _ = require('lodash');
 
 module.exports = {

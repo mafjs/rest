@@ -1690,7 +1690,7 @@ maf-error@^1.2.0:
   dependencies:
     terror "1.4.x"
 
-maf-http@^0.9.0-beta.2:
+maf-http@^0.9.0-beta.3:
   version "0.9.0-beta.3"
   resolved "https://registry.yarnpkg.com/maf-http/-/maf-http-0.9.0-beta.3.tgz#345475dbe875182c30dcea3ddf1ff56206210a13"
   dependencies:
