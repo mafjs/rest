@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@maf/eslint-config@^0.3.4":
+"@maf/eslint-config@^0.3.7":
   version "0.3.7"
   resolved "https://registry.yarnpkg.com/@maf/eslint-config/-/eslint-config-0.3.7.tgz#0b72edd12a7e090ca209f78f7b52baa0c91db83e"
   dependencies:
@@ -1655,7 +1655,7 @@ maf-error@^1.2.0:
   dependencies:
     terror "1.4.x"
 
-maf-http@^0.9.0-beta.6:
+maf-http@^0.9.0:
   version "0.9.0"
   resolved "https://registry.yarnpkg.com/maf-http/-/maf-http-0.9.0.tgz#6238feda06d1975112ccf6679f832baab7dc476e"
   dependencies:
