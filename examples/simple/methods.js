@@ -1,54 +1,50 @@
-var joi = require('joi');
+const joi = require('joi');
 
-var TestError = Error.create('TestError', {
+const TestError = Error.create('TestError', {
     TEST_CODE: 'test code'
 });
 
 module.exports = {
-    'GET /test/count': {
-        handler: function (req, res) {
+    'GET /test': {
+        handler(req, res) {
             res.time('test');
 
-            console.log(req.getQueryParams(['test']));
+            req.logger.debug(req.getQueryParams(['test']));
 
-            setTimeout(function () {
+            setTimeout(() => {
                 res.timeEnd('test');
 
                 res.result('/test/count');
-
             }, 100);
-
         }
     },
 
     'GET /test/:id': {
-        handler: function (req, res) {
+        handler(req, res) {
             res.time('test');
 
-            setTimeout(function () {
+            setTimeout(() => {
                 res.timeEnd('test');
 
-                res.json('/test/:id');
-
+                res.json(`/test/${req.params.id}`);
             }, 100);
-
         }
     },
 
     'POST /test': {
-        beforeMethodCreation: function (method) {
-            method.schema.body = joi.object().keys({
+        beforeMethodCreation(method) {
+            // eslint-disable-next-line no-param-reassign
+            method.schema.body = joi.object().required().keys({
                 q: joi.string().required()
             });
         },
-        handler: function (req, res) {
+        handler(req, res) {
             res.result(req.body);
         }
     },
 
-    'GET /badRequest': function (req, res) {
-
-        var error = new Error('invalid data');
+    'GET /bad_request': function badRequest(req, res) {
+        const error = new Error('invalid data');
 
         error.code = 'INVALID_DATA';
 
@@ -61,8 +57,8 @@ module.exports = {
         res.badRequest(error);
     },
 
-    'GET /notFound': function (req, res) {
-        var error = new Error('task not found');
+    'GET /not_found': function notFound(req, res) {
+        const error = new Error('task not found');
 
         error.code = 'NOT_FOUND';
 
@@ -77,27 +73,33 @@ module.exports = {
         res.notFound(error);
     },
 
-    'GET /serverError': function (req, res) {
-        var error = new Error('some server error');
+    'GET /server_error': function serverError(req, res) {
+        const error = new Error('some server error');
 
         res.serverError(error);
     },
 
-    'GET /forbidden': function (req, res) {
-        var error = new Error('access forbidden');
+    'GET /forbidden': function forbidden(req, res) {
+        const error = new Error('access forbidden');
 
         res.forbidden(error);
     },
 
-    'GET /unauthorized': function (req, res) {
-        var error = new Error('auth required');
+    'GET /unauthorized': function unauthorized(req, res) {
+        const error = new Error('auth required');
 
         res.unauthorized(error);
     },
 
-    'GET /mafError': function (req, res) {
-        var oe = new Error('this is original error message');
-        var e = new TestError(TestError.CODES.TEST_CODE, oe);
+    'GET /conflict': function conflict(req, res) {
+        const error = new Error('conflict');
+
+        res.conflict(error);
+    },
+
+    'GET /maf_error': function mafError(req, res) {
+        const oe = new Error('this is original error message');
+        const e = new TestError(TestError.CODES.TEST_CODE, oe);
 
         res.serverError(e);
     }

@@ -1,20 +1,19 @@
-var joi = require('joi');
-var _ = require('lodash');
+const joi = require('joi');
+const _ = require('lodash');
 
 module.exports = {
-    schema: function () {
+    schema() {
         return joi.alternatives().try(joi.array().items(joi.string()), joi.string());
     },
 
-    get: function (obj, name) {
-
-        var rawFields = _.get(obj, name, null);
+    get(obj, name) {
+        const rawFields = _.get(obj, name, null);
 
         if (!rawFields) {
             return null;
         }
 
-        var fields = null;
+        let fields = null;
 
         if (typeof rawFields === 'string') {
             fields = _.map(rawFields.split(','), v => _.trim(v));

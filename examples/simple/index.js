@@ -1,40 +1,46 @@
-require('source-map-support').install();
-
 require('maf-error/initGlobal');
 
-var logger = require('maf-logger').create('maf-rest');
+const logger = require('maf-logger').create('maf-rest');
 
 logger.level('TRACE');
 
-var express = require('express');
+const express = require('express');
 
-var app = express();
+const app = express();
 
 app.disable('x-powered-by');
 app.disable('etag');
 
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
     req.debug = false;
     next();
 });
 
-var Rest = require('../../package/Rest');
+const Rest = require('../../src/Rest');
 
-var http = new Rest(logger);
+const rest = new Rest(logger);
 
-// http.setEndpoint('/api/v0');
+rest.setEndpoint('/api/v0');
 
-var methods = require('./methods');
+const methods = require('./methods');
+
+// rest.middlewares.send = (error, req, res, next) => {
+//     if (error === 'send') {
+//         res.requestEnd();
+//         const { ctx } = res;
+//         res.status(ctx.status);
+//         // TODO headers
+//         return res.json('custom send');
+//     }
+//
+//     return next(error);
+// };
 
 Promise.resolve()
+    .then(() => rest.addMethods(methods))
+    .then(() => rest.init(app))
     .then(() => {
-        return http.addMethods(methods);
-    })
-    .then(() => {
-        return http.init(app);
-    })
-    .then(() => {
-        app.listen(3007, function () {
+        app.listen(3007, () => {
             logger.info('listen on 3007');
         });
     })

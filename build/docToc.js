@@ -1,34 +1,31 @@
-'use strict';
-
+/* eslint-disable */
 // Load modules
-
 const Toc = require('markdown-toc');
 const Fs = require('fs');
-const Package = require(__dirname + '/../package.json');
+
+const Package = require(`${__dirname}/../package.json`);
 
 // Declare internals
 
 const internals = {
     api: {
-        filename: __dirname + '/../docs/api.md',
-        contents: Fs.readFileSync(__dirname + '/../docs/api.md', 'utf8')
+        filename: `${__dirname}/../docs/api.md`,
+        contents: Fs.readFileSync(`${__dirname}/../docs/api.md`, 'utf8')
     },
     usage: {
-        filename: __dirname + '/../docs/usage-planning.md',
-        contents: Fs.readFileSync(__dirname + '/../docs/usage-planning.md', 'utf8')
+        filename: `${__dirname}/../docs/usage-planning.md`,
+        contents: Fs.readFileSync(`${__dirname}/../docs/usage-planning.md`, 'utf8')
     },
     readme: {
-        filename: __dirname + '/../README.md',
-        contents: Fs.readFileSync(__dirname + '/../README.md', 'utf8')
+        filename: `${__dirname}/../README.md`,
+        contents: Fs.readFileSync(`${__dirname}/../README.md`, 'utf8')
     }
 };
 
 internals.generateToc = function () {
-
     const tocOptions = {
         bullets: '-',
-        slugify: function (text) {
-
+        slugify(text) {
             return text.toLowerCase()
                 .replace(/\s/g, '-')
                 .replace(/[^\w-]/g, '');

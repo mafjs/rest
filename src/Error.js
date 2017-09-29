@@ -1,5 +1,5 @@
-var HttpError = require('maf-http/Error');
+const HttpError = require('maf-http/Error');
 
-var RestError = HttpError.extendCodes({});
+const RestError = HttpError.extendCodes({});
 
 module.exports = RestError;

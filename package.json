@@ -3,27 +3,27 @@
   "version": "0.14.2",
   "description": "http REST API handling",
   "main": "index.js",
+  "files": [
+    "index.js",
+    "Error.js",
+    "src",
+    "helpers.js"
+  ],
   "scripts": {
     "clean": "rm -rf package coverage .nyc_output npm-debug.log",
-    "build": "babel src --out-dir ./package --presets es2015 --source-maps",
-    "build:for-test": "npm run build -- --plugins istanbul",
-    "build:package-json": "node ./build/copyPackageJson",
-    "dev": "npm run build:for-test -- --watch",
     "test": "npm run lint",
     "test:fast": "tap test/unit -J",
     "test:cov": "npm test -- --coverage-report=html",
     "postversion": "git push origin && git push --tags",
-    "prepublish": "in-publish && echo 'use \"npm run _publish\"' && exit 1 || not-in-publish",
-    "_publish": "npm run clean && npm run build && npm run build:package-json && cd ./package && npm publish",
-    "pu": "npm run _publish",
     "toc": "node ./build/docToc.js",
     "lint": "eslint -c .eslintrc.js --ignore-path .gitignore .",
     "lint:fix": "npm run lint -- --fix",
     "precommit": "npm run lint",
-    "prepush": "npm run lint"
+    "prepush": "npm run lint",
+    "dev": "nodemon ./examples/simple | bunyan"
   },
   "engines": {
-    "node": ">=4"
+    "node": ">=6"
   },
   "repository": {
     "type": "git",
@@ -40,17 +40,11 @@
   "homepage": "https://github.com/mafjs/rest#readme",
   "devDependencies": {
     "@maf/eslint-config": "^0.3.4",
-    "babel-cli": "^6.26.0",
-    "babel-eslint": "^8.0.1",
-    "babel-plugin-istanbul": "^4.1.5",
-    "babel-preset-es2015": "^6.24.1",
     "eslint": "^4.7.2",
     "express": "^4.15.5",
     "husky": "^0.14.3",
-    "in-publish": "^2.0.0",
     "maf-logger": "^0.6.1",
     "proxyquire": "^1.8.0",
-    "source-map-support": "^0.4.18",
     "tap": "^10.7.2"
   },
   "dependencies": {
@@ -58,7 +52,7 @@
     "joi": "^11.1.1",
     "lodash": "^4.17.4",
     "maf-error": "^1.2.0",
-    "maf-http": "^0.9.0-beta.1",
+    "maf-http": "^0.9.0-beta.2",
     "maf-kind-of": "^0.1.0"
   },
   "nyc": {

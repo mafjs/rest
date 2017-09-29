@@ -1,26 +1,11 @@
-module.exports = function (req, res) {
-
-    if (!res.httpContext) {
-
-        return res.status(404).json({
-            error: {
-                message: 'resource not found',
-                code: 'RESOURCE_NOT_FOUND'
-            }
-        });
-
+module.exports = function middlewareSend(error, req, res, next) {
+    if (error === 'send') {
+        res.requestEnd();
+        const { ctx } = res;
+        res.status(ctx.status);
+        // TODO headers
+        return res.json(ctx.body);
     }
 
-    res.requestEnd();
-
-    var context = res.httpContext;
-
-    if (req.debug) {
-        context.body.debug = {
-            requestId: req.id,
-            time: res.httpContext.time
-        };
-    }
-
-    res.json(context.body);
+    return next(error);
 };

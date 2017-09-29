@@ -1,8 +1,8 @@
-var stringArray = require('./stringArray');
+const stringArray = require('./stringArray');
 
 module.exports = {
     schema: stringArray.schema,
-    get: function (obj) {
+    get(obj) {
         return stringArray.get(obj, 'fields');
     }
 };
