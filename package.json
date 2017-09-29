@@ -52,7 +52,7 @@
     "joi": "^11.1.1",
     "lodash": "^4.17.4",
     "maf-error": "^1.2.0",
-    "maf-http": "^0.9.0-beta.2",
+    "maf-http": "^0.9.0-beta.3",
     "maf-kind-of": "^0.1.0"
   },
   "nyc": {
