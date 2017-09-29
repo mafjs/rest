@@ -84,6 +84,14 @@ module.exports = {
         };
 
         next('send');
+    },
+
+    created(next, result) {
+        this.ctx.status = 201;
+
+        this.ctx.body = {
+            result
+        };
     }
 
 
