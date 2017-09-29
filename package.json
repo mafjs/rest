@@ -52,7 +52,7 @@
     "body-parser": "^1.18.2",
     "lodash": "^4.17.4",
     "maf-error": "^1.2.0",
-    "maf-http": "^0.9.0-beta.5",
+    "maf-http": "^0.9.0-beta.6",
     "maf-kind-of": "^0.1.0"
   },
   "nyc": {
