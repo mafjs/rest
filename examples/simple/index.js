@@ -37,8 +37,9 @@ const methods = require('./methods');
 // };
 
 Promise.resolve()
+    .then(() => rest.initApp(app))
     .then(() => rest.addMethods(methods))
-    .then(() => rest.init(app))
+    .then(() => rest.initMethods(app))
     .then(() => {
         app.listen(3007, () => {
             logger.info('listen on 3007');

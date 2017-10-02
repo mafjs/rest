@@ -6,7 +6,18 @@ module.exports = function middlewareError(error, req, res, next) {
         res.requestEnd();
     }
 
-    error.getCheckChain()
+    if (typeof error.getCheckChain !== 'function') {
+        req.logger.error({ req, err: error });
+
+        return res.status(500).json({
+            error: {
+                message: 'Server Error',
+                code: 'SERVER_ERROR'
+            }
+        });
+    }
+
+    return error.getCheckChain()
         .ifCode(RestError.CODES.INVALID_REQUEST_DATA, (err) => {
             req.logger.trace('rest middlewareError, send 400 Bad Request');
 

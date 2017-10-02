@@ -22,24 +22,30 @@ class Rest extends Http {
         this.middlewares = middlewares;
     }
 
-    init(app, di) {
+    initApp(app, di) {
+        super.initApp(app, di);
+
+        app.use(bodyParser.json({ type: '*/*' }));
+
+        app.use((error, req, res, next) => {
+            if (error instanceof SyntaxError) {
+                res.status(400).json({
+                    error: {
+                        message: 'request body is not valid JSON',
+                        code: 'INVALID_JSON_BODY'
+                    }
+                });
+            } else {
+                next(error);
+            }
+        });
+
+        return app;
+    }
+
+    initMethods(app, di) {
         return new Promise((resolve, reject) => {
-            app.use(bodyParser.json({ type: '*/*' }));
-
-            app.use((error, req, res, next) => {
-                if (error instanceof SyntaxError) {
-                    res.status(400).json({
-                        error: {
-                            message: 'request body is not valid JSON',
-                            code: 'INVALID_JSON_BODY'
-                        }
-                    });
-                } else {
-                    next(error);
-                }
-            });
-
-            super.init(app, di)
+            super.initMethods(app, di)
                 .then(() => {
                     app.use(this.middlewares.send);
                     app.use(this.middlewares.notFound);
