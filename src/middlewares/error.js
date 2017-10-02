@@ -30,6 +30,10 @@ module.exports = function middlewareError(error, req, res, next) {
             });
         })
         .else((err) => {
+            if (err.req) {
+                req.logger.error({ err, req: err.req, res: err.res }, 'api-client error');
+            }
+
             req.logger.error({ req, err });
             res.status(500).json({
                 error: {
