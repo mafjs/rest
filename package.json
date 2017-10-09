@@ -40,7 +40,7 @@
   },
   "homepage": "https://github.com/mafjs/rest#readme",
   "devDependencies": {
-    "@maf/eslint-config": "^0.3.7",
+    "@maf/eslint-config": "^0.4.2",
     "eslint": "^4.8.0",
     "eslint-plugin-import": "^2.7.0",
     "express": "^4.16.1",
