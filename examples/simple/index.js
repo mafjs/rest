@@ -20,7 +20,7 @@ const Rest = require('../../src/Rest');
 
 const rest = new Rest(logger);
 
-rest.setEndpoint('/api/v0');
+rest.setEndpoint('/api');
 
 const methods = require('./methods');
 

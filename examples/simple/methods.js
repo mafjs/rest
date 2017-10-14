@@ -1,4 +1,4 @@
-const joi = require('maf-http/joi');
+const joi = require(`${__dirname}/../../joi`);
 
 const TestError = Error.create('TestError', {
     TEST_CODE: 'test code'
@@ -6,40 +6,62 @@ const TestError = Error.create('TestError', {
 
 module.exports = {
     'GET /test': {
+        beforeInit: [
+            (req, res, next) => {
+                res._beforeInitCalled = true;
+                next();
+            }
+        ],
+        inited: [
+            (req, res, next) => {
+                res.ctx.body = {
+                    middlewares: []
+                };
+
+                if (res._beforeInitCalled === true) {
+                    res.ctx.body.middlewares.push('beforeInit');
+                }
+
+                res.ctx.body.middlewares.push('inited1');
+                next();
+            },
+            (req, res, next) => {
+                res.ctx.body.middlewares.push('inited2');
+                next();
+            }
+        ],
+        validated: [
+            (req, res, next) => {
+                res.ctx.body.middlewares.push('validated');
+                next();
+            }
+        ],
         handler(req, res) {
-            res.time('test');
-
-            req.logger.debug(req.getQueryParams(['test']));
-
-            setTimeout(() => {
-                res.timeEnd('test');
-
-                res.result('/test/count');
-            }, 100);
+            res.ctx.body.middlewares.push('handler');
+            res.sendCtx(200);
         }
     },
 
-    'GET /test/:id': {
-        handler(req, res) {
-            res.time('test');
-
-            setTimeout(() => {
-                res.timeEnd('test');
-
-                res.json(`/test/${req.params.id}`);
-            }, 100);
-        }
-    },
+    // 'GET /test/:id': {
+    //     handler(req, res) {
+    //         res.result(`/test/${req.params.id}`);
+    //     }
+    // },
 
     'POST /test': {
-        beforeMethodCreation(method) {
-            // eslint-disable-next-line no-param-reassign
+        onCreate(method) {
             method.schema.body = joi.object().required().keys({
-                q: joi.string().required()
+                id: joi.number().required()
             });
         },
         handler(req, res) {
             res.result(req.body);
+        }
+    },
+
+    'GET /result': {
+        handler(req, res) {
+            res.result('result');
         }
     },
 
@@ -94,6 +116,8 @@ module.exports = {
     'GET /conflict': function conflict(req, res) {
         const error = new Error('conflict');
 
+        error.code = 'ALREADY_EXISTS';
+
         res.conflict(error);
     },
 
@@ -102,5 +126,16 @@ module.exports = {
         const e = new TestError(TestError.CODES.TEST_CODE, oe);
 
         res.serverError(e);
+    },
+
+    'GET /request_helpers_fields': {
+        onCreate: function(method) {
+            method.schema.query = joi.object().required().keys({
+                fields: joi.stringArray()
+            });
+        },
+        handler: function(req, res) {
+            res.result(req.query.fields);
+        }
     }
 };
