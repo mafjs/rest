@@ -7,7 +7,13 @@ const helpers = require('./helpers');
 
 const middlewares = require('./middlewares');
 
+/**
+ */
 class Rest extends Http {
+    /**
+     * @param {Logger} logger
+     * @param {Config} config
+     */
     constructor(logger, config) {
         super(logger, config);
 
@@ -22,10 +28,15 @@ class Rest extends Http {
         this.middlewares = middlewares;
     }
 
+    /**
+     * @param {Express} app
+     * @param {Object} di
+     * @return {Express}
+     */
     initApp(app, di) {
         super.initApp(app, di);
 
-        app.use(bodyParser.json({ type: '*/*' }));
+        app.use(bodyParser.json({type: '*/*'}));
 
         app.use((error, req, res, next) => {
             if (error instanceof SyntaxError) {
@@ -43,6 +54,11 @@ class Rest extends Http {
         return app;
     }
 
+    /**
+     * @param {Express} app
+     * @param {Object} di
+     * @return {Promise}
+     */
     initMethods(app, di) {
         return new Promise((resolve, reject) => {
             super.initMethods(app, di)

@@ -16,7 +16,7 @@ module.exports = {
         let fields = null;
 
         if (typeof rawFields === 'string') {
-            fields = _.map(rawFields.split(','), v => _.trim(v));
+            fields = _.map(rawFields.split(','), (v) => _.trim(v));
         } else if (Array.isArray(rawFields)) {
             fields = rawFields;
         } else {
