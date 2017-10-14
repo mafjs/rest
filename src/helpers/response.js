@@ -1,5 +1,9 @@
 module.exports = {
-    sendCtx(next) {
+    sendCtx(next, status) {
+        if (typeof status !== 'undefined') {
+            this.ctx.status = status;
+        }
+
         next('send');
     },
 
