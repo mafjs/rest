@@ -1,4 +1,8 @@
 module.exports = {
+    sendCtx(next) {
+        next('send');
+    },
+
     result(next, result, metadata) {
         this.ctx.status = 200;
 
@@ -46,7 +50,8 @@ module.exports = {
             error: {
                 message: error.message,
                 code: error.code,
-                list: error.list
+                list: error.list,
+                entity: error.entity
             }
         };
 
