@@ -201,3 +201,33 @@ tap.test('should 500 GET /api/maf_error', (t) => {
         });
     });
 });
+
+tap.test('should return fields with requestHelpers.fields, if string', (t) => {
+    return createService()
+        .then((app) => {
+            return request(app)
+            .get('/api/request_helpers_fields')
+            .query({fields: '1, 2, 3'})
+            .expect(200)
+            .then((res) => {
+                t.type(res.headers['x-request-id'], 'string');
+                t.same(res.body, {result: [1, 2, 3]});
+                t.done();
+        });
+    });
+});
+
+tap.test('should return fields with requestHelpers.fields, if array', (t) => {
+    return createService()
+        .then((app) => {
+            return request(app)
+            .get('/api/request_helpers_fields')
+            .query({fields: ['1 ', ' 2', '3']})
+            .expect(200)
+            .then((res) => {
+                t.type(res.headers['x-request-id'], 'string');
+                t.same(res.body, {result: [1, 2, 3]});
+                t.done();
+        });
+    });
+});

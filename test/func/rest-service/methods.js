@@ -1,4 +1,4 @@
-const joi = require('maf-http/joi');
+const joi = require(`${__dirname}/../../../joi`);
 
 const TestError = Error.create('TestError', {
     TEST_CODE: 'test code'
@@ -37,9 +37,8 @@ module.exports = {
             }
         ],
         handler(req, res) {
-            res.ctx.status = 200;
             res.ctx.body.middlewares.push('handler');
-            res.sendCtx();
+            res.sendCtx(200);
         }
     },
 
@@ -127,5 +126,16 @@ module.exports = {
         const e = new TestError(TestError.CODES.TEST_CODE, oe);
 
         res.serverError(e);
+    },
+
+    'GET /request_helpers_fields': {
+        onCreate: function(method) {
+            method.schema.query = joi.object().required().keys({
+                fields: joi.stringArray()
+            });
+        },
+        handler: function(req, res) {
+            res.result(req.query.fields);
+        }
     }
 };
