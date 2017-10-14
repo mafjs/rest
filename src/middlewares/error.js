@@ -18,6 +18,16 @@ module.exports = function middlewareError(error, req, res, next) {
     }
 
     return error.getCheckChain()
+        .ifCode('FORBIDDEN', (err) => {
+            req.logger.trace('rest middlewareError, send 403 Forbidden');
+
+            res.status(400).json({
+                error: {
+                    message: err.message,
+                    code: err.code
+                }
+            });
+        })
         .ifCode(RestError.CODES.INVALID_REQUEST_DATA, (err) => {
             req.logger.trace('rest middlewareError, send 400 Bad Request');
 
