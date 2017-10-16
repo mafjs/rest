@@ -15,6 +15,7 @@ module.exports = {
         inited: [
             (req, res, next) => {
                 res.ctx.body = {
+                    routeName: req.ctx.routeName,
                     middlewares: []
                 };
 

@@ -19,13 +19,16 @@ tap.test('should 200 GET /api/test', (t) => {
             .expect(200)
             .then((res) => {
                 t.type(res.headers['x-request-id'], 'string');
-                t.same(res.body, {middlewares: [
-                    'beforeInit',
-                    'inited1',
-                    'inited2',
-                    'validated',
-                    'handler'
-                ]});
+                t.same(res.body, {
+                    routeName: 'GET/test',
+                    middlewares: [
+                        'beforeInit',
+                        'inited1',
+                        'inited2',
+                        'validated',
+                        'handler'
+                    ]
+                });
                 t.done();
         });
     });
