@@ -1656,9 +1656,9 @@ maf-error@^1.2.0:
   dependencies:
     terror "1.4.x"
 
-maf-http@^0.14.0:
-  version "0.14.0"
-  resolved "https://registry.yarnpkg.com/maf-http/-/maf-http-0.14.0.tgz#2d12759c31fa46a684b0b54447c7b7f1b8b338af"
+maf-http@^0.15.0:
+  version "0.15.0"
+  resolved "https://registry.yarnpkg.com/maf-http/-/maf-http-0.15.0.tgz#292ae5bd201e8c0f67bcbf11d4fa6a5be585a61f"
   dependencies:
     joi "^11.3.4"
     lodash.get "^4.4.2"

@@ -19,8 +19,16 @@ module.exports = {
                     middlewares: []
                 };
 
+                if (res._globalBeforeInit === true) {
+                    res.ctx.body.middlewares.push('globalBeforeInit');
+                }
+
                 if (res._beforeInitCalled === true) {
                     res.ctx.body.middlewares.push('beforeInit');
+                }
+
+                if (res._globalInited === true) {
+                    res.ctx.body.middlewares.push('globalInited');
                 }
 
                 res.ctx.body.middlewares.push('inited1');
@@ -33,6 +41,10 @@ module.exports = {
         ],
         validated: [
             (req, res, next) => {
+                if (res._globalValidated === true) {
+                    res.ctx.body.middlewares.push('globalValidated');
+                }
+
                 res.ctx.body.middlewares.push('validated');
                 next();
             }

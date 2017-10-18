@@ -21,6 +21,27 @@ module.exports = () => {
 
     const rest = new Rest(logger);
 
+    rest.globalMiddlewares = {
+        beforeInit: [
+            (req, res, next) => {
+                res._globalBeforeInit = true;
+                next();
+            }
+        ],
+        inited: [
+            (req, res, next) => {
+                res._globalInited = true;
+                next();
+            }
+        ],
+        validated: [
+            (req, res, next) => {
+                res._globalValidated = true;
+                next();
+            }
+        ]
+    };
+
     rest.setEndpoint('/api');
 
     const methods = require('./methods');
