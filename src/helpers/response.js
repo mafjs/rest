@@ -1,16 +1,16 @@
 module.exports = {
-    sendCtx(next, status) {
+    sendCtx(res, next, status) {
         if (typeof status !== 'undefined') {
-            this.ctx.status = status;
+            res.ctx.status = status;
         }
 
         next('send');
     },
 
-    result(next, result, metadata) {
-        this.ctx.status = 200;
+    result(res, next, result, metadata) {
+        res.ctx.status = 200;
 
-        this.ctx.body = {
+        res.ctx.body = {
             metadata,
             result
         };
@@ -18,10 +18,10 @@ module.exports = {
         next('send');
     },
 
-    badRequest(next, error) {
-        this.ctx.status = 400;
+    badRequest(res, next, error) {
+        res.ctx.status = 400;
 
-        this.ctx.body = {
+        res.ctx.body = {
             error: {
                 message: error.message,
                 code: error.code,
@@ -32,10 +32,10 @@ module.exports = {
         next('send');
     },
 
-    conflict(next, error) {
-        this.ctx.status = 409;
+    conflict(res, next, error) {
+        res.ctx.status = 409;
 
-        this.ctx.body = {
+        res.ctx.body = {
             error: {
                 message: error.message,
                 entity: error.entity,
@@ -47,10 +47,10 @@ module.exports = {
         next('send');
     },
 
-    notFound(next, error) {
-        this.ctx.status = 404;
+    notFound(res, next, error) {
+        res.ctx.status = 404;
 
-        this.ctx.body = {
+        res.ctx.body = {
             error: {
                 message: error.message,
                 code: error.code,
@@ -62,14 +62,14 @@ module.exports = {
         next('send');
     },
 
-    serverError(next, error) {
+    serverError(res, next, error) {
         next(error);
     },
 
-    forbidden(next, error) {
-        this.ctx.status = 403;
+    forbidden(res, next, error) {
+        res.ctx.status = 403;
 
-        this.ctx.body = {
+        res.ctx.body = {
             error: {
                 message: error.message,
                 code: 'FORBIDDEN',
@@ -80,10 +80,10 @@ module.exports = {
         next('send');
     },
 
-    unauthorized(next, error) {
-        this.ctx.status = 401;
+    unauthorized(res, next, error) {
+        res.ctx.status = 401;
 
-        this.ctx.body = {
+        res.ctx.body = {
             error: {
                 message: error.message,
                 entity: error.entity,
@@ -95,10 +95,10 @@ module.exports = {
         next('send');
     },
 
-    created(next, result) {
-        this.ctx.status = 201;
+    created(res, next, result) {
+        res.ctx.status = 201;
 
-        this.ctx.body = {
+        res.ctx.body = {
             result
         };
     }
